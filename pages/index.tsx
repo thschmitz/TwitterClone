@@ -7,7 +7,7 @@ import Widgets from '../components/Widgets'
 
 const Home: NextPage = () => {
   return (
-    <div className="flex min-h-screen flex-col py-2"> 
+    <div className="lg:max-w-6xl mx-auto max-h-screen overflow-hidden"> 
       {/* I removed items-center justify-center from the className because it was causing a bug with the sidebar */}
       <Head>
         <title>Twitter 2.0</title>

@@ -24,6 +24,7 @@
     "@sanity/image-url": "^1.0.1",
     "@sanity/vision": "^2.29.8",
     "eslint": "^8.6.0",
+    "next-auth": "^4.0.0-beta.7",
     "next-sanity": "^0.5.2",
     "prop-types": "^15.7",
     "react": "^17.0",

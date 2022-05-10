@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react'
-import {Comment, Tweet} from '../typings'
+import React, {useEffect, useState, MouseEvent} from 'react'
+import {Comment, Tweet, CommentBody} from '../typings'
 import TimeAgo from "react-timeago"
 import {
     ChatAlt2Icon,
@@ -8,6 +8,8 @@ import {
     UploadIcon,
 } from "@heroicons/react/outline"
 import {fetchComments} from "../utils/fetchComments"
+import {useSession} from "next-auth/react"
+import toast from 'react-hot-toast'
 
 interface Props {
     tweet: Tweet
@@ -21,6 +23,9 @@ const style = {
 const Tweet = ({tweet}: Props) => {
 
     const [comments, setComments] = useState<Comment[]>([])
+    const [commentBoxVisible, setCommentBoxVisible] = useState<boolean>(false)
+    const [input, setInput] = useState<string>("")
+    const {data:session} = useSession()
 
     const refreshComment = async () => {
         const comments: Comment[] = await fetchComments(tweet._id);
@@ -30,6 +35,40 @@ const Tweet = ({tweet}: Props) => {
     useEffect(() => {
         refreshComment()
     }, [])
+
+    const postComment = async () => {
+        const commentInfo: CommentBody = {
+            comment: input,
+            profileImg: session?.user?.image || "Unknows User",
+            username: session?.user?.name || "https://links.papareact.com/gll",
+            tweetId: tweet._id
+        }
+
+        console.log(tweet._id)
+
+        const result = await fetch("/api/addComment", {
+            body: JSON.stringify(commentInfo),
+            method: "POST",
+        })
+
+        const json = await result.json();
+
+        toast.success("Comment Posted")
+        return json
+    }
+    
+
+    const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        if(!input) return;
+        e.preventDefault();
+
+        postComment();
+
+        setInput("")
+        setCommentBoxVisible(false)
+        
+
+    }
 
 
     console.log(comments)
@@ -55,7 +94,7 @@ const Tweet = ({tweet}: Props) => {
 
             <div className="mt-5 flex justify-between">
                 <div className={style.properties}>
-                    <ChatAlt2Icon className={style.height}/>
+                    <ChatAlt2Icon onClick={() => setCommentBoxVisible(!commentBoxVisible)} className={style.height}/>
                     <p>{comments.length}</p>
                 </div>
                 <div className={style.properties}>
@@ -68,6 +107,13 @@ const Tweet = ({tweet}: Props) => {
                     <UploadIcon className={style.height}/>
                 </div>
             </div>
+
+            {commentBoxVisible && (
+                <form onSubmit={handleSubmit} className="mt-3 flex space-x-3">
+                    <input value={input} onChange={e => setInput(e.target.value)}className="rounded-lg flex-1 bg-gray-100 p-2 outline-none" type="text" placeholder="Write a comment..." />
+                    <button disabled={!input} type="submit" className="text-twitter disabled:text-gray-200">Post</button>
+                </form>
+            )}
 
             {comments?.length > 0 && (
                 <div className="my-2 mt-5 max-h-44 space-y-5 overflow-y-scroll border-t border-gray-100 p-5">

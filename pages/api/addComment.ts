@@ -1,5 +1,6 @@
+// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
-import {TweetBody} from "../../typings"
+import {CommentBody} from "../../typings"
 
 type Data = {
   message: string
@@ -9,19 +10,23 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-    const data: TweetBody = JSON.parse(req.body)
+
+    const comment:CommentBody = JSON.parse(req.body)
     const mutations = {
         mutations: [
             {
-                create:{
-                    _type: "tweet",
-                    text: data.text,
-                    username: data.username,
-                    blockTweet: false,
-                    profileImg: data.profileImg,
-                    image:data.image
+                create: {
+                    _type: "comment",
+                    comment: comment.comment,
+                    username: comment.username,
+                    profileImg: comment.profileImg,
+                    tweet: {
+                        _type:"reference",
+                        _ref: comment.tweetId
+                    }
                 }
             }
+
         ]
     }
 
@@ -35,7 +40,6 @@ export default async function handler(
         body:JSON.stringify(mutations),
         method: 'POST'
     })
-
     const json = await result.json();
-    res.status(200).json({ message: 'Added' })
+    res.status(200).json({ message: "Comment Added" })
 }

@@ -102,6 +102,7 @@ const Tweet = ({tweet}: Props) => {
                 </div>
                 <div className={style.properties}>
                     <HeartIcon className={style.height}/>
+                    <p>{tweet.likes}</p>
                 </div>
                 <div className={style.properties}>
                     <UploadIcon className={style.height}/>

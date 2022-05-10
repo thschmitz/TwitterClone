@@ -28,6 +28,11 @@ export default {
       name: "image",
       title: "Image",
       type: "string",
+    },
+    {
+      name: "likes",
+      title: "Likes",
+      type: "number",
     }
   ],
 }

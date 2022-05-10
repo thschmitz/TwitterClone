@@ -1,5 +1,5 @@
 import React, {useEffect, useState, MouseEvent} from 'react'
-import {Comment, Tweet, CommentBody} from '../typings'
+import {Comment, Tweet, CommentBody, TweetBody} from '../typings'
 import TimeAgo from "react-timeago"
 import {
     ChatAlt2Icon,
@@ -17,7 +17,8 @@ interface Props {
 
 const style = {
     height: `h-5 w-5`,
-    properties: `flex cursor-pointer items-center space-x-3 text-gray-400`
+    properties: `flex cursor-pointer items-center space-x-3 text-gray-400`,
+    propertiesLikes: `flex cursor-pointer items-center space-x-3 text-red-400`,
 }
 
 const Tweet = ({tweet}: Props) => {
@@ -26,6 +27,7 @@ const Tweet = ({tweet}: Props) => {
     const [commentBoxVisible, setCommentBoxVisible] = useState<boolean>(false)
     const [input, setInput] = useState<string>("")
     const {data:session} = useSession()
+    const [liked, setLiked] = useState(false)
 
     const refreshComment = async () => {
         const comments: Comment[] = await fetchComments(tweet._id);
@@ -70,6 +72,27 @@ const Tweet = ({tweet}: Props) => {
 
     }
 
+    const deslike = () => {
+        setLiked(false)
+    }
+
+    const like = async () => {
+        setLiked(true)
+        const likeInfo: TweetBody = {
+            likes: tweet.likes + 1,
+        }
+
+        const result = await fetch("/api/addLike", {
+            body: JSON.stringify(likeInfo),
+            method: "PUT",
+        })
+
+        const json = await result.json();
+
+        toast.success("Liked")
+        return json
+    }
+
 
     console.log(comments)
 
@@ -100,8 +123,8 @@ const Tweet = ({tweet}: Props) => {
                 <div className={style.properties}>
                     <SwitchHorizontalIcon className={style.height}/>
                 </div>
-                <div className={style.properties}>
-                    <HeartIcon className={style.height}/>
+                <div className={liked? style.propertiesLikes : style.properties}>
+                    <HeartIcon onClick={() => liked? deslike() : like()} className={style.height}/>
                     <p>{tweet.likes}</p>
                 </div>
                 <div className={style.properties}>

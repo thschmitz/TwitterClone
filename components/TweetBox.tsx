@@ -35,7 +35,7 @@ const TweetBox = ({setTweets}: Props) => {
       image: image,
       profileImg: session?.user?.image || "Unknows User",
       username: session?.user?.name || "https://links.papareact.com/gll",
-
+      likes: 0,
     }
 
     const result = await fetch("/api/addTweet", {

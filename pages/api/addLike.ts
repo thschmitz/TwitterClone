@@ -10,10 +10,11 @@ export default async function handler(
   res: NextApiResponse<Data>
 ) {
     const data: TweetBody = JSON.parse(req.body)
+    console.log("data: ", data)
     const mutations = {
         mutations: [
             {
-                patch:{
+                update:{
                     _type: "tweet",
                     likes: data.likes,
                 }
@@ -26,10 +27,10 @@ export default async function handler(
     const result = await fetch(apiEndpoint, {
         headers:{
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${process.env.SANITY_API_TOKEN}`
+            Authorization: `Bearer ${process.env.SANITY_API_TOKEN}`,
         },
         body:JSON.stringify(mutations),
-        method: 'PUT'
+        method: 'PATCH'
     })
 
     const json = await result.json();

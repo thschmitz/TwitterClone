@@ -13,6 +13,7 @@ export type TweetBody = {
     profileImg: string,
     image?: string,
     likes?: number,
+    id: string
 }
 
 export type CommentBody = {

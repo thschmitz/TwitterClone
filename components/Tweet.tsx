@@ -78,18 +78,14 @@ const Tweet = ({tweet}: Props) => {
 
     const like = async () => {
         setLiked(true)
-        const likeInfo: TweetBody = {
-            likes: tweet.likes + 1,
-        }
 
         const result = await fetch("/api/addLike", {
-            body: JSON.stringify(likeInfo),
-            method: "PUT",
+            body: JSON.stringify(tweet.likes + 1),
+            method: "PATCH",
         })
 
         const json = await result.json();
-
-        toast.success("Liked")
+        toast.success("Liked!")
         return json
     }
 

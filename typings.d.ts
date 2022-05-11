@@ -12,8 +12,7 @@ export type TweetBody = {
     username: string,
     profileImg: string,
     image?: string,
-    likes?: number,
-    id: string
+    likes: number,
 }
 
 export type CommentBody = {

@@ -10,6 +10,7 @@ import {
 import {fetchComments} from "../utils/fetchComments"
 import {useSession} from "next-auth/react"
 import toast from 'react-hot-toast'
+import {fetchLikes} from "../utils/fetchLikes"
 
 interface Props {
     tweet: Tweet
@@ -78,15 +79,9 @@ const Tweet = ({tweet}: Props) => {
 
     const like = async () => {
         setLiked(true)
+        fetchLikes(tweet._id)
 
-        const result = await fetch("/api/addLike", {
-            body: JSON.stringify(tweet.likes + 1),
-            method: "PATCH",
-        })
-
-        const json = await result.json();
         toast.success("Liked!")
-        return json
     }
 
 

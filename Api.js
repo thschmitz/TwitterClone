@@ -36,5 +36,19 @@ export default{
             setLikes(doc.data().likes)
             console.log("getLikes: ", doc.data().likes)
         })
+    },
+
+    checkLiked: (tweetId, userId, setLiked) => {
+        db.collection("likes").doc(tweetId).onSnapshot((doc) => {
+            if(doc.data().people.length > 0){
+                doc.data().people.forEach(person => {
+                    if(person === userId){
+                        setLiked(true)
+                    }
+                })
+            } else{
+                console.log("includes: ", false)
+            }
+        })
     }
 }

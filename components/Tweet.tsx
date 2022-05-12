@@ -39,7 +39,12 @@ const Tweet = ({tweet}: Props) => {
     useEffect(() => {
         refreshComment()
         Api.getLikes(tweet._id, setLikes)
+        if(session) {
+            console.log("entrouu")
+        }
+
     }, [])
+    Api.checkLiked(tweet._id, session?.user?.name, setLiked)
 
     const postComment = async () => {
         const commentInfo: CommentBody = {

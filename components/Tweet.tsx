@@ -10,7 +10,7 @@ import {
 import {fetchComments} from "../utils/fetchComments"
 import {useSession} from "next-auth/react"
 import toast from 'react-hot-toast'
-import {fetchLikes} from "../utils/fetchLikes"
+import Api from "../Api"
 
 interface Props {
     tweet: Tweet
@@ -79,7 +79,8 @@ const Tweet = ({tweet}: Props) => {
 
     const like = async () => {
         setLiked(true)
-        fetchLikes(tweet._id)
+
+        Api.addLikes(tweet._id, session.user.name)
 
         toast.success("Liked!")
     }

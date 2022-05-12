@@ -12,9 +12,29 @@ const auth = firebaseApp.auth();
 export default{
 
     addLikes: (tweetId, userId) => {
-        console.log("addLikes: ", tweetId, userId)
-        db.collection("likes").doc("teste").post({
-            likes: firebase.firestore.FieldValue.arrayUnion(userId)
+        const increment = firebase.firestore.FieldValue.increment(1)
+
+        db.collection("likes").doc(tweetId).set({
+            likes: increment,
+            people: firebase.firestore.FieldValue.arrayUnion(userId)
+        }, {merge:true})
+    },
+
+    removeLikes: (tweetId, userId) => {
+        const decrement = firebase.firestore.FieldValue.increment(-1)
+
+        db.collection("likes").doc(tweetId).set({
+            likes: decrement,
+            people: firebase.firestore.FieldValue.arrayRemove(userId)
+        }, {merge:true})
+    },
+
+
+    getLikes: (tweetId, setLikes) => {
+        console.log("getLikes: ", tweetId)
+        db.collection("likes").doc(tweetId).onSnapshot((doc) => {
+            setLikes(doc.data().likes)
+            console.log("getLikes: ", doc.data().likes)
         })
     }
 }

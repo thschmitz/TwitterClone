@@ -29,6 +29,7 @@ const Tweet = ({tweet}: Props) => {
     const [input, setInput] = useState<string>("")
     const {data:session} = useSession()
     const [liked, setLiked] = useState(false)
+    const [likes, setLikes] = useState()
 
     const refreshComment = async () => {
         const comments: Comment[] = await fetchComments(tweet._id);
@@ -37,6 +38,7 @@ const Tweet = ({tweet}: Props) => {
 
     useEffect(() => {
         refreshComment()
+        Api.getLikes(tweet._id, setLikes)
     }, [])
 
     const postComment = async () => {
@@ -75,13 +77,17 @@ const Tweet = ({tweet}: Props) => {
 
     const deslike = () => {
         setLiked(false)
+
+        Api.removeLikes(tweet._id, session.user.name)
+        Api.getLikes(tweet._id, setLikes)
+        toast.success("Desliked")
     }
 
     const like = async () => {
         setLiked(true)
 
         Api.addLikes(tweet._id, session.user.name)
-
+        Api.getLikes(tweet._id, setLikes)
         toast.success("Liked!")
     }
 
@@ -117,7 +123,7 @@ const Tweet = ({tweet}: Props) => {
                 </div>
                 <div className={liked? style.propertiesLikes : style.properties}>
                     <HeartIcon onClick={() => liked? deslike() : like()} className={style.height}/>
-                    <p>{tweet.likes}</p>
+                    <p>{likes}</p>
                 </div>
                 <div className={style.properties}>
                     <UploadIcon className={style.height}/>

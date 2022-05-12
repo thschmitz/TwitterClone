@@ -11,15 +11,14 @@ const tweetQuery = groq`
         ...
     }
 `
-type Data = {
-    tweets: Tweet[]
-}
+type Data = Tweet[]
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-    const tweets: Tweet[] = await sanityClient.fetch(tweetQuery)
+    const {tweetId} = req.query;
+    const tweets: Tweet[] = await sanityClient.fetch(tweetQuery, {tweetId})
     console.log("Teste:", tweets)
-    res.status(200).json({tweets})
+    res.status(200).json(tweets)
 }

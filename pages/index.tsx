@@ -7,13 +7,19 @@ import Widgets from '../components/Widgets'
 import { fetchTweets } from '../utils/fetchTweets'
 import {Tweet} from '../typings'
 import { Toaster } from 'react-hot-toast'
+import {useState} from "react"
+import Profile from "../components/Profile"
 
 interface Props{
   tweets: Tweet[]
 }
 
+
+
 const Home = ({tweets}: Props) => {
   console.log(tweets)
+  const [profile, setProfile] = useState(false)
+
   return (
     <div className="lg:max-w-6xl mx-auto max-h-screen overflow-hidden"> 
       {/* I removed items-center justify-center from the className because it was causing a bug with the sidebar */}
@@ -26,8 +32,12 @@ const Home = ({tweets}: Props) => {
 
       <main className="grid grid-cols-9">
         <Sidebar/>
-
-        <Feed tweets={tweets}/>
+        {
+          profile?
+          <Profile/>
+            :
+          <Feed tweets={tweets}/>
+        }
         
         <Widgets/>
       </main>

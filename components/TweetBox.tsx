@@ -66,7 +66,7 @@ const TweetBox = ({setTweets}: Props) => {
 
   return (
     <div className="flex space-x-2 p-5">
-        <img className="h-14 w-14 object-cover rounded-full mt-4" src={session?.user?.image || "https://links.papareact.com/gll"} alt="" />
+        <img className="cursor-pointer h-14 w-14 object-cover rounded-full mt-4" src={session?.user?.image || "https://links.papareact.com/gll"} alt="" />
         <div className="flex flex-1 items-center pl-2">
           <form className="flex flex-1 flex-col">
             <input onChange={(e) => setInput(e.target.value)} value={input} type="text" placeholder="What's happening?" className="h-24 w-full text-xl outline-none placeholder:text-xl"/>

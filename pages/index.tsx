@@ -9,6 +9,8 @@ import {Tweet} from '../typings'
 import { Toaster } from 'react-hot-toast'
 import {useState} from "react"
 import Profile from "../components/Profile"
+import {BrowserRouter as Router, Route} from "react-router-dom";
+import React from "react";
 
 interface Props{
   tweets: Tweet[]
@@ -32,13 +34,7 @@ const Home = ({tweets}: Props) => {
 
       <main className="grid grid-cols-9">
         <Sidebar/>
-        {
-          profile?
-          <Profile/>
-            :
-          <Feed tweets={tweets}/>
-        }
-        
+        <Feed tweets={tweets}/>
         <Widgets/>
       </main>
     </div>

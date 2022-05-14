@@ -9188,7 +9188,7 @@
     "copy-to-clipboard" "^3.3.1"
     "prop-types" "^15.8.1"
 
-"react-dom@^0.14.0 || ^15.0.0 || ^16.0.0", "react-dom@^15.0.0 || ^16.0.0 || ^17.0.0 ", "react-dom@^16.0.0-0", "react-dom@^16.8.0 || ^17 || ^18", "react-dom@^16.8.0 || 17.x", "react-dom@^16.9 || ^17", "react-dom@^16.9 || ^17 || ^18", "react-dom@^17.0", "react-dom@^17.0.0 || ^16.3.0 || ^15.5.4", "react-dom@^17.0.2 || ^18", "react-dom@>= 15.3", "react-dom@>= 16.8.0", "react-dom@>=16.13", "react-dom@>=16.8", "react-dom@>=16.8 || ^17.0.0", "react-dom@>=16.8 || ^17.0.0 || ^18.0.0", "react-dom@>=16.8.0":
+"react-dom@^0.14.0 || ^15.0.0 || ^16.0.0", "react-dom@^15.0.0 || ^16.0.0 || ^17.0.0 ", "react-dom@^16.0.0-0", "react-dom@^16.8.0 || ^17 || ^18", "react-dom@^16.8.0 || 17.x", "react-dom@^16.9 || ^17", "react-dom@^16.9 || ^17 || ^18", "react-dom@^17.0.0 || ^16.3.0 || ^15.5.4", "react-dom@^17.0.2", "react-dom@^17.0.2 || ^18", "react-dom@>= 15.3", "react-dom@>= 16.8.0", "react-dom@>=16.13", "react-dom@>=16.8", "react-dom@>=16.8 || ^17.0.0", "react-dom@>=16.8 || ^17.0.0 || ^18.0.0", "react-dom@>=16.8.0":
   "integrity" "sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-17.0.2.tgz"
   "version" "17.0.2"

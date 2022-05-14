@@ -7,15 +7,13 @@ import Widgets from '../components/Widgets'
 import { fetchTweets } from '../utils/fetchTweets'
 import {Tweet} from '../typings'
 import { Toaster } from 'react-hot-toast'
-import {useState} from "react"
 
 interface Props{
   tweets: Tweet[]
 }
 
-
-
 const Home = ({tweets}: Props) => {
+  
   console.log(tweets)
 
   return (

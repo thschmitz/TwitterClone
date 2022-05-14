@@ -11,6 +11,7 @@ import{
 } from '@heroicons/react/outline'
 import SidebarRow from './SidebarRow'
 import {signOut, signIn, useSession} from "next-auth/react"
+import Link from "next/link"
 
 const Sidebar = () => {
 
@@ -19,7 +20,7 @@ const Sidebar = () => {
 
   return (
     <div className="m-3 flex flex-col col-span-2 items-center px-4 md:items-start">
-        <img className="h-9 w-9 mb-5" src="https://links.papareact.com/drq" alt="" />
+        <Link href="/"><img className="h-9 w-9 mb-5 cursor-pointer" src="https://links.papareact.com/drq" alt="" /></Link>
         <SidebarRow Icon={HomeIcon} title="Home" />
         <SidebarRow Icon={HashtagIcon} title="Explore" />
         <SidebarRow Icon={BellIcon} title="Notifications" />

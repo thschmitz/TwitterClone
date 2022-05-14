@@ -9,7 +9,7 @@ interface Props{
   tweets: Tweet[]
 }
 
-const Feed = ({tweets: tweetsProps}:Props, setProfile:Boolean) => {
+const Feed = ({tweets: tweetsProps}:Props) => {
 
   const [tweets, setTweets] = useState<Tweet[]>(tweetsProps)
   console.log(tweets)

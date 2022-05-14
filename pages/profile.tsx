@@ -30,7 +30,7 @@ const Home = ({tweets}: Props) => {
 
       <main className="grid grid-cols-9">
         <Sidebar/>
-        <Profile/>
+        <Profile tweets={tweets}/>
         <Widgets/>
       </main>
     </div>

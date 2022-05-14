@@ -7,7 +7,7 @@ module.exports = {
     extend: {
       colors: {
         twitter: "#00ADED",
-      }
+      },
     },
   },
   plugins: [require("tailwind-scrollbar-hide")],

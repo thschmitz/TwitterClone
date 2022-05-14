@@ -7,7 +7,7 @@ import Widgets from '../components/Widgets'
 import { fetchTweets } from '../utils/fetchTweets'
 import {Tweet} from '../typings'
 import { Toaster } from 'react-hot-toast'
-import {useState} from "react"
+import Profile from "../components/Profile"
 
 interface Props{
   tweets: Tweet[]
@@ -30,7 +30,7 @@ const Home = ({tweets}: Props) => {
 
       <main className="grid grid-cols-9">
         <Sidebar/>
-        <Feed tweets={tweets}/>
+        <Profile/>
         <Widgets/>
       </main>
     </div>

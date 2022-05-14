@@ -1,8 +1,15 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {useSession} from "next-auth/react"
+import {fetchTweets} from "../utils/fetchTweets";
 
-const Profile = () => {
+const Profile = async () => {
   const {data: session} = useSession()
+  const [tweetsProfile, setTweetsProfile] = useState<Tweet[]>([])
+
+  const tweets = await fetchTweets();
+  setTweetsProfile(tweets)
+
+
   return (
     <div className="col-span-7 border-x max-h-screen scrollbar-hide overflow-scroll lg:col-span-5">
         <div className="flex item-center justify-between">
@@ -25,7 +32,7 @@ const Profile = () => {
             <h1 className="text-sm ml-4 mt-4"><b>0</b> Followers</h1>
           </div>
           <div className="tweetsProfile">
-            
+
           </div>
         </div>
 

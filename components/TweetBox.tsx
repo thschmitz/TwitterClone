@@ -5,6 +5,7 @@ import { TweetBody, Tweet } from '../typings'
 import { fetchTweets } from '../utils/fetchTweets'
 import toast from 'react-hot-toast'
 import Link from "next/link"
+import Api from "../Api"
 
 const style= {
   iconAnimation: `h-5 w-5 cursor-pointer transition-transform duration-150 ease-out hover:scale-150`
@@ -12,9 +13,10 @@ const style= {
 
 interface Props{
   setTweets: Dispatch<SetStateAction<Tweet[]>>
+  tweets: Tweet[]
 }
 
-const TweetBox = ({setTweets}: Props) => {
+const TweetBox = ({setTweets}: Props, {tweets}:Props) => {
   const [input, setInput] = useState<string>("")
   const imageInputRef = useRef<HTMLInputElement>(null)
   const {data: session} = useSession()
@@ -51,6 +53,8 @@ const TweetBox = ({setTweets}: Props) => {
 
     const newTweets = await fetchTweets();
     setTweets(newTweets)
+
+    Api.addPost(newTweets[0]._id)
 
     toast.success("Tweet Posted")
     return json

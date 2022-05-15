@@ -29,6 +29,13 @@ export default{
         }, {merge:true})
     },
 
+    addPost: (tweetId) => {
+        db.collection("likes").doc(tweetId).set({
+            likes: 0,
+            people: []
+        })
+    },
+
 
     getLikes: (tweetId, setLikes) => {
         db.collection("likes").doc(tweetId).onSnapshot((doc) => {
@@ -37,14 +44,14 @@ export default{
     },
 
     checkLiked: (tweetId, userId, setLiked) => {
+
         db.collection("likes").doc(tweetId).onSnapshot((doc) => {
-            if(doc.data().people.length > 0){
-                doc.data().people.forEach(person => {
-                    if(person === userId){
-                        setLiked(true)
-                    }
-                })
+            if(doc.data().people){
+                if(doc.data().people.includes(userId)){
+                    setLiked(true)
+                }
             } else{
+                setLiked(false)
             }
         })
     }

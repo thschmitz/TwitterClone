@@ -31,10 +31,8 @@ export default{
 
 
     getLikes: (tweetId, setLikes) => {
-        console.log("getLikes: ", tweetId)
         db.collection("likes").doc(tweetId).onSnapshot((doc) => {
             setLikes(doc.data().likes)
-            console.log("getLikes: ", doc.data().likes)
         })
     },
 
@@ -47,7 +45,6 @@ export default{
                     }
                 })
             } else{
-                console.log("includes: ", false)
             }
         })
     }

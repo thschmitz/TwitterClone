@@ -14,8 +14,6 @@ interface Props{
 
 const Home = ({tweets}: Props) => {
   
-  console.log(tweets)
-
   return (
     <div className="lg:max-w-6xl mx-auto max-h-screen overflow-hidden"> 
       {/* I removed items-center justify-center from the className because it was causing a bug with the sidebar */}

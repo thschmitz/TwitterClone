@@ -39,9 +39,6 @@ const Tweet = ({tweet}: Props) => {
     useEffect(() => {
         refreshComment()
         Api.getLikes(tweet._id, setLikes)
-        if(session) {
-            console.log("entrouu")
-        }
 
     }, [])
     Api.checkLiked(tweet._id, session?.user?.name, setLiked)
@@ -54,7 +51,6 @@ const Tweet = ({tweet}: Props) => {
             tweetId: tweet._id
         }
 
-        console.log(tweet._id)
 
         const result = await fetch("/api/addComment", {
             body: JSON.stringify(commentInfo),
@@ -97,7 +93,6 @@ const Tweet = ({tweet}: Props) => {
     }
 
 
-    console.log(comments)
 
     return (
         <div className="flex flex-col space-x-3 border-y p-5 border-gray-100">

@@ -79,7 +79,7 @@ const Tweet = ({tweet}: Props) => {
     const deslike = () => {
         setLiked(false)
 
-        Api.removeLikes(tweet._id, session.user.name)
+        Api.removeLikes(tweet._id, session?.user?.name)
         Api.getLikes(tweet._id, setLikes)
         toast.success("Desliked")
     }
@@ -87,7 +87,7 @@ const Tweet = ({tweet}: Props) => {
     const like = async () => {
         setLiked(true)
 
-        Api.addLikes(tweet._id, session.user.name)
+        Api.addLikes(tweet._id, session?.user?.name)
         Api.getLikes(tweet._id, setLikes)
         toast.success("Liked!")
     }

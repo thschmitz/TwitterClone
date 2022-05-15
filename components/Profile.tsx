@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {useSession} from "next-auth/react"
 import {fetchTweets} from "../utils/fetchTweetsProfile";
 import {Tweet} from '../typings'
@@ -12,17 +12,22 @@ interface Props{
 const Profile = ({tweets: tweetsProps}:Props) => {
   const {data: session} = useSession()
   const [tweets, setTweets] = useState<Tweet[]>(tweetsProps)
-
+  
   const handleRefresh = async function() {
     
     const refreshToast = toast.loading("Refreshing...")
-    const tweets = await fetchTweets();
+    const tweets = await fetchTweets(session?.user?.name);
     setTweets(tweets)
 
     toast.success("Profile Updated", {
       id: refreshToast
     })
   }
+
+  useEffect(async ()=>{
+    const tweets = await fetchTweets(session?.user?.name);
+    setTweets(tweets)
+  }, [])
 
   return (
     <div className="col-span-7 border-x max-h-screen scrollbar-hide overflow-scroll lg:col-span-5">

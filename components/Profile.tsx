@@ -5,17 +5,18 @@ import {Tweet} from '../typings'
 import { RefreshIcon } from '@heroicons/react/outline'
 import toast from "react-hot-toast";
 import TweetComponent from "./Tweet";
-import {getCsrfToken} from "next-auth/react";
-
 interface Props{
   tweets: Tweet[]
 }
+
+
 const Profile = ({tweets: tweetsProps}:Props) => {
   const {data: session} = useSession()
   const [tweets, setTweets] = useState<Tweet[]>(tweetsProps)
-  console.log("Token: ", getCsrfToken())
+
   const handleRefresh = async function() {
     
+
     const refreshToast = toast.loading("Refreshing...")
     const tweets = await fetchTweets(session?.user?.name);
     setTweets(tweets)
@@ -26,8 +27,8 @@ const Profile = ({tweets: tweetsProps}:Props) => {
   }
 
   useEffect(async ()=>{
-    const tweets = await fetchTweets(session?.user?.name);
-    setTweets(tweets)
+      const tweets = await fetchTweets(session?.user?.name);
+      setTweets(tweets)
   })
 
   return (

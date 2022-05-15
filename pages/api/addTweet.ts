@@ -10,6 +10,7 @@ export default async function handler(
   res: NextApiResponse<Data>
 ) {
     const data: TweetBody = JSON.parse(req.body)
+    console.log("data: ", data)
     const mutations = {
         mutations: [
             {
@@ -19,7 +20,8 @@ export default async function handler(
                     username: data.username,
                     blockTweet: false,
                     profileImg: data.profileImg,
-                    image:data.image
+                    image:data.image,
+                    likes: 0,
                 }
             }
         ]

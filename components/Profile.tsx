@@ -27,7 +27,7 @@ const Profile = ({tweets: tweetsProps}:Props) => {
   useEffect(async ()=>{
     const tweets = await fetchTweets(session?.user?.name);
     setTweets(tweets)
-  }, [])
+  })
 
   return (
     <div className="col-span-7 border-x max-h-screen scrollbar-hide overflow-scroll lg:col-span-5">

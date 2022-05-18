@@ -15,6 +15,14 @@ export type TweetBody = {
     likes: number,
 }
 
+export type User = {
+    img: string,
+    _type: "user",
+    name: string,
+    _id: string,
+    email: string,
+}
+
 export type CommentBody = {
     comment:string
     tweetId: string

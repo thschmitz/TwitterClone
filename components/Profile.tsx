@@ -5,6 +5,7 @@ import {Tweet} from '../typings'
 import { RefreshIcon } from '@heroicons/react/outline'
 import toast from "react-hot-toast";
 import TweetComponent from "./Tweet";
+import {fetchUser} from "../utils/fetchUser"
 interface Props{
   tweets: Tweet[]
 }
@@ -29,6 +30,8 @@ const Profile = ({tweets: tweetsProps}:Props) => {
   useEffect(async ()=>{
       const tweets = await fetchTweets(session?.user?.image);
       setTweets(tweets)
+
+      console.log(session.user.id)
   })
 
   return (
@@ -75,5 +78,6 @@ const Profile = ({tweets: tweetsProps}:Props) => {
     </div>
   )
 }
+
 
 export default Profile

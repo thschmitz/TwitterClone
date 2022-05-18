@@ -12,6 +12,7 @@ export default async function handler(
 ) {
 
     const comment:CommentBody = JSON.parse(req.body)
+    console.log("Comments: ", req.body)
     const mutations = {
         mutations: [
             {

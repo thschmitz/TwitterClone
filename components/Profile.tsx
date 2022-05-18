@@ -18,7 +18,7 @@ const Profile = ({tweets: tweetsProps}:Props) => {
     
 
     const refreshToast = toast.loading("Refreshing...")
-    const tweets = await fetchTweets(session?.user?.name);
+    const tweets = await fetchTweets(session?.user?.image);
     setTweets(tweets)
 
     toast.success("Profile Updated", {
@@ -27,7 +27,7 @@ const Profile = ({tweets: tweetsProps}:Props) => {
   }
 
   useEffect(async ()=>{
-      const tweets = await fetchTweets(session?.user?.name);
+      const tweets = await fetchTweets(session?.user?.image);
       setTweets(tweets)
   })
 
